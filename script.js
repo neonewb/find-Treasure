@@ -26,12 +26,12 @@ function createWave(event, color) {
     wave.style.left = (event.pageX - 25) + "px";
     wave.style.backgroundColor  = color;
     wave.className = 'wave';
+    wave.addEventListener("transitionend", function() {
+        wave.remove();
+    });
     setTimeout(function() {
       wave.classList.add("active");
     }, 0);
-    wave.addEventListener("transitionend", function() {
-      wave.remove();
-    });
     document.body.appendChild(wave);
 }
 
