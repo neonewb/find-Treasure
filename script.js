@@ -24,15 +24,19 @@ function createWave(event, color) {
     let wave = document.createElement('div');
     wave.style.top = (event.pageY - 25) + "px";
     wave.style.left = (event.pageX - 25) + "px";
-    wave.style.backgroundColor  = color;
+    wave.style.backgroundColor = color;
+    wave.id = 'wave';
     wave.className = 'wave';
     wave.addEventListener("transitionend", function() {
-        wave.remove();
+        this.remove();
     });
     setTimeout(function() {
       wave.classList.add("active");
     }, 0);
     document.body.appendChild(wave);
+    setTimeout(function() {
+        wave.remove();
+      }, 650);
 }
 
 let cklickSound = document.getElementById('clickSound');
@@ -49,7 +53,6 @@ function onMapClick(event) {
     clickCounter++;
     $('#clickCounter').text('Количество кликов: ' + clickCounter);
     let sumDifference = Math.abs(target.xCoord - event.offsetX) + Math.abs(target.yCoord - event.offsetY);
-
     if (sumDifference > 700) {
         createWave(event, '#002947');
         $('#distance').text('Мороз');
